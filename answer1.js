@@ -43,5 +43,6 @@ function run(inpFile) {
     getText(inpFile).then(getModulesAndMasses).catch(console.error);
 }
 
+
 run('input1.txt');
 
