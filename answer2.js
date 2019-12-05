@@ -1,12 +1,38 @@
+function processInput(arr, op, para1, para2, position) {
+    var stop = false;
+  //  console.log(op);
+    if(op === 1) {
+        arr[position] = arr[para1] + arr[para2];
+    }
 
+    else if(op === 2) {
+        arr[position] = arr[para1] * arr[para2];
+    }
+
+    else if(op === 99) {
+        stop = true;
+    } else {
+        console.log("error");
+        throw(new Error("invalid input"));
+       // stop = true;
+    }
+  //  console.log(arr);
+    return {result: arr, stop: stop};
+}
 //console.log(textInput);
+
 function findCalculatedIndex0(day2Input_changed) {
     var arr = day2Input_changed;
     var finalOutput = [];
+  //  console.log(arr.length);
+    
     try {
-    for(var indx = 0; indx < arr.length; indx = indx + 4){
+    for(var indx = 0; arr && !!arr.length && indx < arr.length; indx = indx + 4){
+   //     console.log(indx);
       //  console.log("at index ---- " + indx);
         var el = arr[indx];
+      //  console.log("processInput");
+      //  console.log(processInput);
         output = processInput(arr, el, arr[indx + 1], arr[indx + 2], arr[indx + 3]);
         arr = output.result;
         if(output.stop) {
@@ -15,7 +41,7 @@ function findCalculatedIndex0(day2Input_changed) {
         }
     } 
 }catch (error){
-    return 0;
+    console.log(error);
 }
     return finalOutput[0];
 }
@@ -33,9 +59,9 @@ for(var noun = 0; noun < 100; noun++) {
     var inputArray = day2Input.slice(0);
     inputArray[1] = noun;
     inputArray[2] = verb;
-    console.log(inputArray);
+   // console.log(inputArray);
     var position0Value = findCalculatedIndex0(inputArray)
-    console.log(position0Value);
+ //   console.log(position0Value);
     if(position0Value === 19690720){
         console.log("answer to second part");
         console.log(100 * noun + verb);
