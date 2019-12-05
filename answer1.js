@@ -1,5 +1,8 @@
 // Answer 1 for the https://adventofcode.com/2019/day/1
 var fs = require("fs");
+//var colors = require('colors');
+function moduleAnswer1() {
+
 const startDate = new Date();
 function getText(inputFile) {
     // read text from file
@@ -46,3 +49,5 @@ function run(inpFile) {
 
 run('input1.txt');
 
+}
+module.exports = moduleAnswer1;

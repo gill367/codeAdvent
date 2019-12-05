@@ -1,0 +1,25 @@
+{
+  "name": "aoc",
+  "version": "1.0.0",
+  "description": "Advent of Code",
+  "main": "index.js",
+  "scripts": {
+    "test": "test"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/gill367/codeAdvent.git"
+  },
+  "keywords": [
+    "AdventOdCode"
+  ],
+  "author": "Sarbjeet Singh",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/gill367/codeAdvent/issues"
+  },
+  "homepage": "https://github.com/gill367/codeAdvent#readme",
+  "dependencies": {
+    "lodash": "^4.17.15"
+  }
+}
