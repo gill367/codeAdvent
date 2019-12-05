@@ -1,3 +1,4 @@
+// Answer 1 for the https://adventofcode.com/2019/day/1
 var fs = require("fs");
 const startDate = new Date();
 function getText(inputFile) {
@@ -22,7 +23,7 @@ function getModulesAndMasses(textInput) {
     var totalFuel = fuelsArray.reduce((a, b) => a + b);
     console.log("Total Effective Fuel (Part 2) " + totalFuel);
     const endDate = new Date();
-    console.log(endDate - startDate);
+    console.log("Time Taken is " + (endDate - startDate) + " ms");
 }
 
 function getFuelForModule(mass) {
