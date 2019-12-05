@@ -15,16 +15,12 @@ function processInput(arr, op, indx, para1, para2, position, inp) {
         return arr1[indxPara];
 
       }
-  //    console.log(mode);
+
       throw new Error("not correct input");
 
     }
     var opcodeString = findOpstringValue(opString, 2) + "" + findOpstringValue(opString, 1);
-    // console.log("op" + op + "- indx" + indx + "--[ " +arr[indx] + ", " +arr[indx + 1] + " ," + arr[indx + 2]  + " , " + arr[indx + 3]  +  " , " + arr[indx + 4]  + " ]-- opcodeString" +  opcodeString 
-    // + " - input " + inp + "- position" + position   );
-   
-   // var opStringSet = opString.split();
-  //  console.log(op);
+    ;
     if(opcodeString === '01') {
        
         arr[position] = valueAsPerMode(opString, arr, indx + 1 ,1) + valueAsPerMode(opString, arr, indx + 2 ,2);
@@ -34,7 +30,7 @@ function processInput(arr, op, indx, para1, para2, position, inp) {
           nextIndex = indx + 4;
         }
         
-     //   console.log("changed value - sum -> at "+ position + "to " + arr[position]);
+    
     }
 
     else if(opcodeString === '02') {
@@ -44,7 +40,7 @@ function processInput(arr, op, indx, para1, para2, position, inp) {
       } else {
         nextIndex = indx + 4;
       }
-   //   console.log("changed value - multiply -> " + position + "to " + arr[position]);
+   
     }
 
     else if(opcodeString === '03') {
@@ -62,7 +58,7 @@ function processInput(arr, op, indx, para1, para2, position, inp) {
 else if(opcodeString === '05') {
  var value = valueAsPerMode(opString, arr, indx + 1 ,1);
   if(value !== 0) {
- //   console.log("value" +value);
+
      nextIndex = valueAsPerMode(opString, arr, indx + 2 ,2);
   
   } else {
