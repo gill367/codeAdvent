@@ -1,4 +1,4 @@
-console.log("Day 6 ---"); // lot of snow. 6th of Dec
+console.log("Day 6 ---"); // lots of snow outside. 6th of Dec. lets code. 
 var fs = require("fs");
 
 function getText(inputFile) {
