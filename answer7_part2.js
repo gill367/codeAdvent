@@ -1,5 +1,5 @@
 var count = 0;
-console.log("input day 7 ------------------------------------------------------------ ------------------------------------------------ ---->");
+console.log("input day 7 ------------------------------------------------------------ part 2 ------------------------------------------------ ---->");
 
 function processInput(arr, op, indx, para1, para2, position, inp, inp2, inpCount, initialPhaseProcessed) {
   var stop = false;
