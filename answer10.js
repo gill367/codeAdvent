@@ -1,4 +1,4 @@
-console.log("Day 8 ---");
+console.log("Day 10 ---");
 var fs = require("fs");
 
 function getText(inputFile) {
