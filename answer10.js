@@ -69,7 +69,7 @@ function printAstMap(finalLinearArray, laserPosition, vaporisedAsts, getdestroye
     return new Promise((resolve, reject) => {
         var row = "";
         var previous = "";
-           finalLinearArray.forEach(fla => {
+           finalLinearArray.forEach((fla, findx) => {
                 if(previous && previous.y !== fla.y) {
                     row = row + "\r\n";
                 }
@@ -77,41 +77,74 @@ function printAstMap(finalLinearArray, laserPosition, vaporisedAsts, getdestroye
                 var flag = !!vaporisedAsts[getdestroyedAstatPosition - 1] && vaporisedAsts[getdestroyedAstatPosition - 1].ast.x === fla.x  
                              && vaporisedAsts[getdestroyedAstatPosition - 1].ast.y === fla.y ? true : false;
                 row = row + (fla.astPresent ? fla.x === laserPosition.x && fla.y === laserPosition.y ? ' X '.green.bold : ' # '.white: fla.destoryed ?  
-                              flag ? ' * '.red.bold :'   ' : '   ');
+                              flag ? ' A '.red.bold :' . ' : '   ');
+
+                                //    console.log('--------------------------------------------------------------------');
+        
     
            });
-        //    console.log('--------------------------------------------------------------------');
-        setTimeout(() => {
+
+           setTimeout(() => {
             console.clear();
             console.log(row);
              //  printProgress(row);
         //      console.log('--------------------------------------------------------------------');
               resolve(true);
-        }, 750);
+        }, 50);
+      
       
     });
     
       
 
 }
-function processAndPrint(finalLinearArray, laserPosition, vaporisedAsts, getdestroyedAstatPosition) {
-    printAstMap(finalLinearArray, laserPosition, vaporisedAsts, getdestroyedAstatPosition).then(() => {
+ function processAndPrint(finalLinearArray, laserPosition, vaporisedAsts, getdestroyedAstatPosition) {
+    printAstMap(finalLinearArray, laserPosition, vaporisedAsts, getdestroyedAstatPosition).then(async () => {
         let visibleAsstRecalc = calculateVisibleAstr(laserPosition, 0, finalLinearArray).visibleAstrs.sort((a, b) => {
             return a.angle - b.angle;
         });;
       
         vaporisedAsts = vaporisedAsts.concat(visibleAsstRecalc);
 
-        finalLinearArray = finalLinearArray.map((fel) => {
-            const visibleAst = visibleAsstRecalc.find((vel) => {
-                return vel.ast.x === fel.x && vel.ast.y === fel.y;
+        // finalLinearArray = finalLinearArray.map((fel, indx, arr) => {
+        //     const visibleAst = visibleAsstRecalc.find((vel) => {
+        //         return vel.ast.x === fel.x && vel.ast.y === fel.y;
+        //     });
+        //     if (visibleAst) {
+        //         fel.astPresent = false;
+        //         fel.destoryed = true;
+        //     }
+        //     return fel;
+        // })
+     //   const finalLinearArray1 = [];
+        // for(indx1 = 0; indx1 < finalLinearArray.length; indx1++) {
+        //     const fel = finalLinearArray[indx1];
+        //     const visibleAst = visibleAsstRecalc.find((vel) => {
+        //         return vel.ast.x === fel.x && vel.ast.y === fel.y;
+        //     });
+        //     if (visibleAst) {
+        //         fel.astPresent = false;
+        //         fel.destoryed = true;
+        //         finalLinearArray[indx1] = fel;
+        //         await printAstMap(finalLinearArray, laserPosition, vaporisedAsts, getdestroyedAstatPosition);
+        //     }
+            
+
+
+        // }
+
+        for(var indx1 = 0; indx1< visibleAsstRecalc.length; indx1++) {
+            const fel = visibleAsstRecalc[indx1];
+            const visibleAstIndex = finalLinearArray.findIndex((vel) => {
+                return vel.x === fel.ast.x && vel.y === fel.ast.y;
             });
-            if (visibleAst) {
-                fel.astPresent = false;
-                fel.destoryed = true;
+            if (visibleAstIndex !== -1) {
+                finalLinearArray[visibleAstIndex].astPresent = false;
+                finalLinearArray[visibleAstIndex].destoryed = true;
+              //  finalLinearArray[indx1] = fel;
+                await printAstMap(finalLinearArray, laserPosition, vaporisedAsts, getdestroyedAstatPosition);
             }
-            return fel;
-        })
+        }
         
         if (finalLinearArray.filter((fel) => fel.astPresent).length === 1) {
             printAstMap(finalLinearArray, laserPosition, vaporisedAsts, getdestroyedAstatPosition).then(() => {
@@ -162,4 +195,4 @@ function processInput(getdestroyedAstatPosition, data) {
 function run(inputFile, getdestroyedAstatPosition) {
     getText(inputFile).then(processInput.bind(this, getdestroyedAstatPosition));
 }
-run('input10.txt', 5);
+run('input10.txt', 200);
