@@ -202,17 +202,18 @@ function findNextPointandDirection(currentPoint, currentdirection, inputset) {
 
 }
 
-function getInputFromPoint(point, coll){
+function getInputFromPoint(point, coll, initialinput){
    var pointExist =  [];
    pointExist = coll.filter((cel) => {
      return cel.x === point.x && cel.y === point.y;
    });
-  var existingColor = !pointExist || !pointExist.length ? 1 : pointExist[pointExist.length - 1].color;
+  var existingColor = !pointExist || !pointExist.length ? initialinput : pointExist[pointExist.length - 1].color;
   //var pointExist;
   return {existingColor: existingColor,pointExist: pointExist};
 }
 
 function runProgram(day2Input_changed, input, relBaseInput, startPoint, startDirection) {
+  var initialinput = input;
   var arr = day2Input_changed;
   var outputSet = [];
   var outputPair = [];
@@ -242,7 +243,7 @@ function runProgram(day2Input_changed, input, relBaseInput, startPoint, startDir
         nextPoint = npd.nextPoint;
         nextDirection = npd.nextDirection
         outputPair = [];
-        var existingPoint = getInputFromPoint(nextPoint, pointsCovered);
+        var existingPoint = getInputFromPoint(nextPoint, pointsCovered, initialinput);
         input = existingPoint.existingColor; //getInputFromPoint(nextPoint, pointsCovered);
         
         pointsCovered.push(coloredPoint);
@@ -289,7 +290,7 @@ var outputSorted  = output.sort((a,b) => {
   return b.indx - a.indx;
 });
 
-// console.log(outputSorted);
+// console.log(outputSorted.length);
 
 output = outputSorted.filter((ot, indx, arr) => {
   var indxfound = arr.findIndex((arEl) => arEl.x === ot.x && arEl.y === ot.y);
